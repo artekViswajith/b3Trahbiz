@@ -73,7 +73,7 @@ export default function Loader({ onComplete }: LoaderProps) {
     );
 
     // Hold the text briefly
-    tl.to({}, { duration: 0.2    duration: 0.5,      // Time to fade out compass (seconds) });
+    tl.to({}, { duration: 0.2 });
 
     return () => {
       tl.kill();
