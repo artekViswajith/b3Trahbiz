@@ -1,45 +1,11 @@
-import Footer from "@/components/Footer";
+"use client";
 
-const PROPERTIES = [
-  {
-    name: "Trahbiz Signature Hotel",
-    location: "Bengaluru, India",
-    details:
-      "Our flagship property blending contemporary luxury with business-ready infrastructure and personalized concierge service.",
-  },
-  {
-    name: "Trahbiz City Residences",
-    location: "Dubai, UAE",
-    details:
-      "Premium serviced residences for extended stays, executive travel, and high-comfort city living.",
-  },
-  {
-    name: "Trahbiz Seaside Retreat",
-    location: "Bali, Indonesia",
-    details:
-      "A leisure-focused coastal property curated for wellness escapes, private events, and destination celebrations.",
-  },
-  {
-    name: "Trahbiz Alpine Lodge",
-    location: "Interlaken, Switzerland",
-    details:
-      "Boutique mountain hospitality designed for luxury leisure and team retreats in scenic alpine surroundings.",
-  },
-  {
-    name: "Trahbiz Heritage Residence",
-    location: "Lisbon, Portugal",
-    details:
-      "A restored heritage address offering immersive local experiences with modern hospitality standards.",
-  },
-  {
-    name: "Trahbiz Waterfront Suites",
-    location: "Singapore",
-    details:
-      "Strategic urban waterfront accommodation with seamless access for corporate and premium family travel.",
-  },
-];
+import Footer from "@/components/Footer";
+import { useProperties } from "@/lib/use-content";
 
 export default function OurPropertiesPage() {
+  const { properties } = useProperties();
+
   return (
     <main className="inner-page">
       <section className="inner-page-container">
@@ -53,8 +19,8 @@ export default function OurPropertiesPage() {
         </div>
 
         <div className="inner-page-grid">
-          {PROPERTIES.map((property) => (
-            <article key={property.name} className="inner-card" data-clickable>
+          {properties.map((property) => (
+            <article key={property.id} className="inner-card" data-clickable>
               <h3>{property.name}</h3>
               <p style={{ color: "var(--color-red)", fontSize: "0.74rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.55rem" }}>
                 {property.location}

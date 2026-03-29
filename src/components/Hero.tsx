@@ -4,6 +4,7 @@ import { useEffect, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useHeroContent } from "@/lib/use-content";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,9 +24,9 @@ export default function Hero({ loaded }: HeroProps) {
   const btnWrapRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
+  const cms = useHeroContent();
 
-  const headline = "Redefining Global Hospitality";
-  const words = useMemo(() => headline.split(" "), []);
+  const words = useMemo(() => cms.headline.split(" "), [cms.headline]);
 
   // ── Entrance animations when loader completes ──
   useEffect(() => {
@@ -212,7 +213,7 @@ export default function Hero({ loaded }: HeroProps) {
             textShadow: "0 1px 10px rgba(0, 0, 0, 0.45)",
           }}
         >
-          Premium Travel & Hospitality
+          {cms.kicker}
         </p>
 
         <h1
@@ -243,13 +244,12 @@ export default function Hero({ loaded }: HeroProps) {
             textShadow: "0 2px 12px rgba(0, 0, 0, 0.45)",
           }}
         >
-          Curated journeys across the world&apos;s most extraordinary destinations
-          — where timeless wonder meets modern luxury.
+          {cms.subtitle}
         </p>
 
         <div ref={btnWrapRef} className="hero-cta-wrap">
           <button ref={btnRef} className="magnetic-btn" data-clickable>
-            Start Exploring
+            {cms.ctaText}
           </button>
         </div>
       </div>

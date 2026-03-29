@@ -1,39 +1,11 @@
-import Footer from "@/components/Footer";
+"use client";
 
-const PACKAGES = [
-  {
-    title: "Executive Mobility",
-    summary:
-      "End-to-end corporate travel planning with managed itineraries, airport assistance, and priority support.",
-  },
-  {
-    title: "Luxury Leisure Collection",
-    summary:
-      "Premium leisure journeys with curated stays, private transfers, and destination-specific experiences.",
-  },
-  {
-    title: "Destination Celebrations",
-    summary:
-      "Seamless planning for weddings, milestone events, and family gatherings in iconic locations worldwide.",
-  },
-  {
-    title: "Adventure & Nature Expeditions",
-    summary:
-      "Guided immersive adventures including wildlife, mountain, and marine exploration experiences.",
-  },
-  {
-    title: "Wellness Rebalance Journeys",
-    summary:
-      "Holistic travel programs focused on recovery, mindfulness, and high-comfort rejuvenation.",
-  },
-  {
-    title: "Custom Global Itineraries",
-    summary:
-      "Fully bespoke packages designed around personal preferences, pace, and regional interests.",
-  },
-];
+import Footer from "@/components/Footer";
+import { usePackages } from "@/lib/use-content";
 
 export default function OurPackagesPage() {
+  const { packages } = usePackages();
+
   return (
     <main className="inner-page">
       <section className="inner-page-container">
@@ -47,8 +19,8 @@ export default function OurPackagesPage() {
         </div>
 
         <div className="inner-page-grid">
-          {PACKAGES.map((pkg) => (
-            <article key={pkg.title} className="inner-card" data-clickable>
+          {packages.map((pkg) => (
+            <article key={pkg.id} className="inner-card" data-clickable>
               <h3>{pkg.title}</h3>
               <p>{pkg.summary}</p>
             </article>

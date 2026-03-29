@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// ─── Authentication ───
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Global Site Settings ───
+model SiteSettings {
+  id          Int    @id @default(1)
+  siteName    String @default("Trahbiz")
+  siteTagline String @default("Redefining Global Hospitality")
+  logoUrl     String @default("/icons/trahbiz_logo.png")
+  metaTitle   String @default("Trahbiz — Redefining Global Hospitality")
+  metaDesc    String @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Hero Section ───
+model HeroSection {
+  id         Int    @id @default(1)
+  kicker     String @default("Premium Travel & Hospitality")
+  headline   String @default("Redefining Global Hospitality")
+  subtitle   String @db.Text
+  ctaText    String @default("Start Exploring")
+  ctaLink    String @default("#")
+  updatedAt  DateTime @updatedAt
+}
+
+// ─── About Section ───
+model AboutSection {
+  id          Int    @id @default(1)
+  kicker      String @default("About B3 Group")
+  title       String @db.Text
+  leadText    String @db.Text
+  subheading1 String @default("")
+  paragraph1  String @db.Text
+  paragraph2  String @db.Text
+  subheading2 String @default("")
+  paragraph3  String @db.Text
+  listItems   String @db.Text // JSON array of strings
+  closingText String @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Showcase Features ───
+model Feature {
+  id          Int    @id @default(autoincrement())
+  sortOrder   Int    @default(0)
+  number      String
+  title       String
+  description String @db.Text
+  iconSvg     String @db.Text // SVG markup
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Services (Horizontal Scroll) ───
+model Service {
+  id          Int    @id @default(autoincrement())
+  sortOrder   Int    @default(0)
+  number      String
+  title       String
+  subtitle    String
+  description String @db.Text
+  imageUrl    String @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Properties ───
+model Property {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  name      String
+  location  String
+  details   String @db.Text
+  imageUrl  String @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Packages ───
+model Package {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  title     String
+  summary   String @db.Text
+  imageUrl  String @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Contact Cards ───
+model ContactCard {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  title     String
+  email     String @default("")
+  phone     String @default("")
+  address   String @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Navigation Links ───
+model NavLink {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  label     String
+  href      String
+  isActive  Boolean @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Social Links ───
+model SocialLink {
+  id        Int    @id @default(autoincrement())
+  sortOrder Int    @default(0)
+  label     String
+  url       String
+  isActive  Boolean @default(true)
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Footer Settings ───
+model FooterSettings {
+  id        Int    @id @default(1)
+  tagline   String @default("Redefining Global Hospitality — Curated Journeys Since 2024")
+  copyright String @default("Trahbiz. All rights reserved.")
+  updatedAt DateTime @updatedAt
+}

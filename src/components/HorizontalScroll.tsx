@@ -3,74 +3,14 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useServices } from "@/lib/use-content";
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface Service {
-  id: string;
-  number: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-}
-
-const SERVICES: Service[] = [
-  {
-    id: "svc_01",
-    number: "01",
-    title: "Luxury Stays",
-    subtitle: "Palace Hotels & Boutique Resorts",
-    description:
-      "Hand-picked heritage estates and world-class resorts — from overwater villas in the Maldives to alpine lodges in Switzerland.",
-    image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80",
-  },
-  {
-    id: "svc_02",
-    number: "02",
-    title: "Corporate Travel",
-    subtitle: "Seamless Business Journeys",
-    description:
-      "End-to-end corporate travel management with VIP airport transfers, curated team offsites, and incentive travel experiences.",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
-  },
-  {
-    id: "svc_03",
-    number: "03",
-    title: "Guided Tours",
-    subtitle: "Expert-Led Cultural Immersions",
-    description:
-      "Walk through history with specialist guides — from Renaissance districts in Europe to sacred temples in Southeast Asia and medinas in North Africa.",
-    image:
-      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80",
-  },
-  {
-    id: "svc_04",
-    number: "04",
-    title: "Wildlife Safaris",
-    subtitle: "Into the Wild Corners of the World",
-    description:
-      "Track big cats on African game drives, encounter polar wildlife in the Arctic, or cruise through Amazon rainforests — all with expert naturalists.",
-    image:
-      "https://images.unsplash.com/photo-1615824996195-f780bba7cfab?w=600&q=80",
-  },
-  {
-    id: "svc_05",
-    number: "05",
-    title: "Culinary Experiences",
-    subtitle: "A Feast for Every Sense",
-    description:
-      "Private dining with world-class chefs, market walks through global food capitals, and estate tastings — experience authentic flavors worldwide.",
-    image:
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80",
-  },
-];
 
 export default function HorizontalScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const { services } = useServices();
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) return;
@@ -154,14 +94,14 @@ export default function HorizontalScroll() {
         className="horizontal-track"
         style={{ paddingTop: "2rem" }}
       >
-        {SERVICES.map((service) => (
+        {services.map((service) => (
           <article key={service.id} className="service-card" data-clickable>
             <span className="service-card-number">{service.number}</span>
 
             <div className="service-card-image">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={service.image}
+                src={service.imageUrl}
                 alt={service.title}
                 loading="lazy"
               />
