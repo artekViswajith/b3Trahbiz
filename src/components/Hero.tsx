@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useMemo } from "react";
+import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const EarthBackground = dynamic(() => import("@/components/EarthBackground"), {
+  ssr: false,
+});
 
 interface HeroProps {
   loaded: boolean;
@@ -179,8 +184,8 @@ export default function Hero({ loaded }: HeroProps) {
     <section ref={sectionRef} className="hero-section">
       {/* Layer 1: Background Video */}
       <div ref={videoBgRef} className="hero-video-bg">
-        {/* Using a CSS gradient fallback since we don't have a real video file */}
         <div className="video-fallback" />
+        <EarthBackground />
       </div>
 
       {/* Layer 2: Mist / atmosphere */}
@@ -193,15 +198,18 @@ export default function Hero({ loaded }: HeroProps) {
         ))}
       </div>
 
+      <div className="hero-contrast-overlay" />
+
       {/* Layer 3: Content (Foreground) */}
       <div ref={contentRef} className="hero-content">
         <p
           className="hero-subtitle mb-6"
           style={{
-            fontSize: "0.7rem",
+            fontSize: "1rem",
             letterSpacing: "0.35em",
             textTransform: "uppercase",
-            color: "var(--color-red)",
+            color: "rgba(248, 113, 113, 0.98)",
+            textShadow: "0 1px 10px rgba(0, 0, 0, 0.45)",
           }}
         >
           Premium Travel & Hospitality
@@ -214,6 +222,8 @@ export default function Hero({ loaded }: HeroProps) {
             fontWeight: 200,
             lineHeight: 1.1,
             letterSpacing: "-0.02em",
+            color: "rgba(248, 250, 252, 0.98)",
+            textShadow: "0 10px 30px rgba(0, 0, 0, 0.42), 0 2px 10px rgba(0, 0, 0, 0.55)",
           }}
         >
           {words.map((word, i) => (
@@ -229,7 +239,8 @@ export default function Hero({ loaded }: HeroProps) {
             maxWidth: "36rem",
             fontSize: "1rem",
             lineHeight: 1.7,
-            color: "var(--color-text-muted)",
+            color: "rgba(241, 245, 249, 0.9)",
+            textShadow: "0 2px 12px rgba(0, 0, 0, 0.45)",
           }}
         >
           Curated journeys across the world&apos;s most extraordinary destinations
